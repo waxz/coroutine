@@ -1,0 +1,25 @@
+# - Config file for '@PROJECT_NAME@' package
+# It defines the following variables
+#  @PROJECT_NAME_UPPERCASE@_INCLUDE_DIRS - include directories
+#  @PROJECT_NAME_UPPERCASE@_LIBRARIES    - libraries to link against
+
+# Include project directory and dependency directory
+set(@PROJECT_NAME@_INCLUDE_DIRS "@INSTALL_INCLUDE_DIR@/@PROJECT_NAME@" @PROJECT_DEPEND_INCLUDE_DIRS@)
+set(@PROJECT_NAME_UPPERCASE@_INCLUDE_DIRS "@INSTALL_INCLUDE_DIR@/@PROJECT_NAME@" @PROJECT_DEPEND_INCLUDE_DIRS@)
+
+
+# Import the exported targets
+# Set the expected library variable
+get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+# message(STATUS "***************** SELF_DIR: " ${SELF_DIR})
+set(LIBS @PROJECT_LIBS@ )
+# message("${PROJECT_NAME}_LIBS" ${LIBS})
+foreach(lib  IN LISTS LIBS)
+    include("${SELF_DIR}/${lib}Targets.cmake")
+    list(APPEND @PROJECT_NAME@_LIBRARIES ${lib})
+    list(APPEND @PROJECT_NAME_UPPERCASE@_LIBRARIES ${lib})
+
+endforeach()
+
+# Import extern libraries
+@PROJECT_DEPEND_LIBRARIES_HINTS@

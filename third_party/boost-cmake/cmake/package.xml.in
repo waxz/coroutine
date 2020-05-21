@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<package>
+    <name>@PROJECT_NAME@</name>
+    <version>0.1.0</version>
+    <description>
+        @PROJECT_NAME@
+    </description>
+    <license>BSD</license>
+</package>
